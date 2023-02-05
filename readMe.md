@@ -15,6 +15,7 @@
 - score counter
 - high score (if there's time)
 - make questions random (if there's time)
+- validate inputs and throw errors (if there is time)
 
 ## strategy
 

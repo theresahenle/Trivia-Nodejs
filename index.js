@@ -117,42 +117,31 @@ class Trivia {
     while (continueGame) {
       // choosing category
       let category = prompt("select a category: history, survival, geography");
-      console.log(category)
+      //console.log(category)
 
       ///////////// development /////////////////////////
 
-      // const displayQuestion = gameData.map((obj) => {
-      //   if (obj['theme'] == category){
-      //       let myQuestions = obj['questionArray[question]'] && ['questionArray[choices]']
-      //     console.log(myQuestions)
-      //   }
-         
-      // });
-      
-
       // this works
       const categoryQuestions = gameData.filter(theObj => theObj.theme == category)[0]
-      const newQuestions = categoryQuestions.questionArray.filter(question => !gameStatus.usedQuestionsArray.includes(question.QID)) // exclude questions already used
-
-      console.log(newQuestions) // this needs to be checked
-
-      
-
-      
-   
-      // function getRandomInt(questionsRemaining) {
-      //   return Math.floor(Math.random() * questionsRemaining)
-      // }
-      // console.log(getRandomInt());
-     
-
-
-
-
-
+      const newQuestions = categoryQuestions.questionArray.filter(question =>   !gameStatus.usedQuestionsArray.includes(question.QID)) // exclude questions already used
+ 
       // randomly display the question (of those not yet asked)
 
+      if(){}
+      const getRandomInt = Math.floor(Math.random()*newQuestions.length)
+      const currentQuestion = newQuestions[getRandomInt];
+      console.log(currentQuestion.question);
+      console.log(currentQuestion.choices);
+
       // providing answer and determing correctness
+      const answer = prompt(`Enter your answer (a, b, c, d): `);
+      if (answer === currentQuestion.answer){
+        console.log(`Correct!`)
+      } else {
+        console.log(`Incorrect!`)
+      }
+     
+     
 
      // let userAnswer = prompt("");
      //  if(userAnswer === .answer){
@@ -163,10 +152,19 @@ class Trivia {
       // update the score
 
       // record question into usedQuestions
-      
 
+      let placeholder = newQuestions[0]
+      gameStatus.usedQuestionsArray.push(placeholder.QID)
 
-      continueGame = false // this is just a place holder to prevent infinite loop
+      console.log(gameStatus.usedQuestionsArray)
+
+      // decide if game should continue
+      let continueGame = prompt("Would you like to continue to the next question? Type 'yes' or 'no'.")
+      if(continueGame == 'yes'){
+         continueGame = 'true'
+      } else {
+        continueGame = 'false'
+      }
     }
     
     console.log("Congratulations! Game is over. Your score was: " + gameStatus.score)

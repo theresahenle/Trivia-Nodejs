@@ -116,10 +116,11 @@ class Trivia {
       
     while (continueGame) {
       // choosing category
-      let category = prompt("select a category: history, survival, geography");
+      let category = prompt("Type a category: history, survival, geography");
       //console.log(category)
-
-      ///////////// development /////////////////////////
+        // if (category !== 'history' || category !== 'survival' || category !== 'geography'){
+        //   category = prompt("Watch for spelling! Type a category: history, survival, geography")
+        // }
 
       // this works
       const categoryQuestions = gameData.filter(theObj => theObj.theme == category)[0]
@@ -127,43 +128,42 @@ class Trivia {
  
       // randomly display the question (of those not yet asked)
 
-      if(){}
-      const getRandomInt = Math.floor(Math.random()*newQuestions.length)
-      const currentQuestion = newQuestions[getRandomInt];
-      console.log(currentQuestion.question);
-      console.log(currentQuestion.choices);
+      if(newQuestions.length > 0){
+        const getRandomInt = Math.floor(Math.random()*newQuestions.length)
+        const currentQuestion = newQuestions[getRandomInt];
+        console.log(currentQuestion.question);
+        console.log(currentQuestion.choices);
 
-      // providing answer and determing correctness
-      const answer = prompt(`Enter your answer (a, b, c, d): `);
-      if (answer === currentQuestion.answer){
-        console.log(`Correct!`)
-      } else {
-        console.log(`Incorrect!`)
+        // providing answer and determing correctness
+        const answer = prompt(`Enter your answer (a, b, c, d): `);
+          // if (answer !== 'a' || answer !== 'b' || answer !== 'c' || answer !== 'd'){
+          //   answer = prompt(`Enter your answer. Please choose: (a, b, c, d): `)
+          // }
+        
+        // update the score
+        if (answer === currentQuestion.answer){
+          console.log(`Correct!`);
+          gameStatus.score++;
+        } else {
+          console.log(`Incorrect!`);
+          gameStatus.score--;          
+        }
+        console.log("your score is ", gameStatus.score);
+        gameStatus.usedQuestionsArray.push(currentQuestion.QID)
+        
+      }else{
+        console.log(`No more questions remaining in this category.`);
       }
      
-     
-
-     // let userAnswer = prompt("");
-     //  if(userAnswer === .answer){
-     //  // add to the number of correct answers
-     //  score++;
-     //  }
-
-      // update the score
-
       // record question into usedQuestions
-
-      let placeholder = newQuestions[0]
-      gameStatus.usedQuestionsArray.push(placeholder.QID)
-
-      console.log(gameStatus.usedQuestionsArray)
+      // gameStatus.usedQuestionsArray.push(currentQuestion.QID)
 
       // decide if game should continue
-      let continueGame = prompt("Would you like to continue to the next question? Type 'yes' or 'no'.")
-      if(continueGame == 'yes'){
-         continueGame = 'true'
+      let chooseContinue = prompt("Would you like to continue to the next question? Type 'yes' or 'no'.")
+      if(chooseContinue === 'yes'){
+         continueGame = true
       } else {
-        continueGame = 'false'
+        continueGame = false
       }
     }
     

@@ -113,18 +113,38 @@ class Trivia {
     }
     console.log("Welcome to the game!")
     let continueGame = true
+      
     while (continueGame) {
       // choosing category
       let category = prompt("select a category: history, survival, geography");
       console.log(category)
 
-      const displayQuestion = gameData.map((obj) => {
-        if ((obj['theme'] == category))
-          console.log(obj['questionArray'])
-        let myQuestions = obj['questionArray']
+      ///////////// development /////////////////////////
 
-      });
-      return displayQuestion
+      // const displayQuestion = gameData.map((obj) => {
+      //   if (obj['theme'] == category){
+      //       let myQuestions = obj['questionArray[question]'] && ['questionArray[choices]']
+      //     console.log(myQuestions)
+      //   }
+         
+      // });
+      
+
+      // this works
+      const categoryQuestions = gameData.filter(theObj => theObj.theme == category)[0]
+      const newQuestions = categoryQuestions.questionArray.filter(question => !gameStatus.usedQuestionsArray.includes(question.QID)) // exclude questions already used
+
+      console.log(newQuestions) // this needs to be checked
+
+      
+
+      
+   
+      // function getRandomInt(questionsRemaining) {
+      //   return Math.floor(Math.random() * questionsRemaining)
+      // }
+      // console.log(getRandomInt());
+     
 
 
 
@@ -134,13 +154,21 @@ class Trivia {
 
       // providing answer and determing correctness
 
+     // let userAnswer = prompt("");
+     //  if(userAnswer === .answer){
+     //  // add to the number of correct answers
+     //  score++;
+     //  }
+
       // update the score
 
       // record question into usedQuestions
+      
 
 
       continueGame = false // this is just a place holder to prevent infinite loop
     }
+    
     console.log("Congratulations! Game is over. Your score was: " + gameStatus.score)
     if (gameStatus.score > this.highScore) {
       this.highScore = gameStatus.score
